@@ -194,7 +194,7 @@ namespace Omnifinity {
 								Debug.LogWarning("Server Version: " + omnitrackVersion.major + "." + omnitrackVersion.minor+ "." + omnitrackVersion.patch);
 								raiseVersionWarning = true;
 						} else {
-							Debug.Log("[Omnitrack] All good. The versions of the TrackingStructure of this Game and the Tracking-server match eachother.", gameObject);
+							Debug.Log("[Omnitrack] All good. The versions of the TrackingStructure of this Game and the Tracking-server match eachother.");
 						}
 					} else if (bytesRead == System.Runtime.InteropServices.Marshal.SizeOf(trackingData)) {
 
@@ -210,7 +210,7 @@ namespace Omnifinity {
                     }
 					
 				} catch (SocketException e) {
-					Debug.LogError ("[Omnitrack] Error:" + e.ErrorCode.ToString () + " " + e.Message.ToString (), gameObject);
+					Debug.LogError ("[Omnitrack] Error:" + e.ErrorCode.ToString () + " " + e.Message.ToString ());
 				}
 
 				// listen for next package
