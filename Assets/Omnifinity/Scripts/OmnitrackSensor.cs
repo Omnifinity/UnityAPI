@@ -175,9 +175,6 @@ namespace Omnifinity {
 			public Vector3 getSensorDeltaPosition() { return sensorDeltaPosition; }
 			public Quaternion getSensorQuat() { return sensorQuat; }
 
-			#endregion PUBLIC_METHODS
-
-			#region PRIVATE_METHODS
 			/// <summary>
 			/// A tracking sensor object
 			/// </summary>
@@ -272,16 +269,6 @@ namespace Omnifinity {
 				else
 					newPos = Vector3.Slerp (prevPos, newPos, slerpPositionFactor);
 
-					// NOTE: CHANGE AS YOU SEE FITTING FOR YOUR SIMULATION/GAME
-                    // If we've defined the sensor as a head only store the head height since
-                    // it "slides" inside the character body in the most simple implemenation. 
-                    // NOTE: this does not have to be the case in your game but is the simplest
-                    // implementation as of now. 
-                    // You could have the body controlled by one sensor and the head controlled by another sensor
-					if (sensorType == SensorConf.HEAD) {
-						newPos = new Vector3(0, sensor.pr.y, 0);
-					}
-
 				// store Un-smoothened Position for external access
 				setSensorPosition(newPos);
 
@@ -320,8 +307,9 @@ namespace Omnifinity {
 					// store quat for next iteration
 					prevQuat = newQuat;
 				}
-			}
-			#endregion PRIVATE_METHODS
-		}
+            }
+
+            #endregion PUBLIC_METHODS
+        }
 	}
 }
