@@ -8,7 +8,8 @@
  */
 
 /* TODO: 
- * Append proper error handling throughout the whole repository
+ * Migrate character controller from OVR to HTC Vive to allow for ground plane collision.
+ * Append proper error handling throughout the whole repository.
  */
 
 /*
