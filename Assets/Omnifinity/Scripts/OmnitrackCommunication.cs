@@ -189,7 +189,7 @@ namespace Omnifinity {
 						if (OmnitrackDefinitions.getMajor() != omnitrackVersion.major ||
 							OmnitrackDefinitions.getMinor() != omnitrackVersion.minor ||
 							OmnitrackDefinitions.getPatch() != omnitrackVersion.patch){
-								Debug.LogWarning("Warning! The tracking structure versions in the game and server do not match.");
+								Debug.LogWarning("Warning! The tracking structure versions in the game and server do not match. This is usually not a problem.");
 								Debug.LogWarning("Game   Version: " + OmnitrackDefinitions.getMajor() + "." + OmnitrackDefinitions.getMinor() + "." + OmnitrackDefinitions.getPatch());
 								Debug.LogWarning("Server Version: " + omnitrackVersion.major + "." + omnitrackVersion.minor+ "." + omnitrackVersion.patch);
 								raiseVersionWarning = true;
