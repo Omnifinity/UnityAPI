@@ -44,10 +44,6 @@ namespace Omnifinity {
 			// The character controller should have a sensor attached to it
 			private OmnitrackSensor omnitrackCharacterBodySensor;
 
-			/// <summary>
-			/// Various tags, gameobjects and components that need to be properly assigned.
-			/// </summary>
-
             /// <summary>
             /// Character controller that handles movement and collision with objects
             /// </summary>
@@ -63,6 +59,12 @@ namespace Omnifinity {
 			/// and parent of all other sensor objects
 			/// </summary>
 			private OmnitrackPlatformHeightAdjuster bodyHeightAdjusterObject;
+
+            /// <summary>
+            /// SteamVR Controller Manager
+            /// </summary>
+            private SteamVR_ControllerManager steamVRControllerManager;
+            private bool isSteamVRCameraGrounded;
 
             /// <summary>
             /// TODO: Implement code for excessive initial movement
@@ -82,26 +84,15 @@ namespace Omnifinity {
 				// find character controller object
 				if (isCharacterController) {
 					charController = GetComponent<CharacterController> ();
-                    //charController = playerController.GetComponent<CharacterController>();
+                }
 
-					if (!charController) {
-						Debug.LogError ("Unable to get hold of the CharacterController. Attach me to an object with a Unity CharacterController.", gameObject);
-					}
-
-					// find height adjustment object to get correct height between Omnideck and Unity Game.
-					bodyHeightAdjusterObject = GameObject.FindObjectOfType<OmnitrackPlatformHeightAdjuster> ();
-					if (!bodyHeightAdjusterObject) {
-						Debug.LogError ("Unable to get hold of the body height ground lever adjuster gameobject", gameObject);
-					}
-
-					// Adjust with skinwidth to get really accurate, the value is the default CharacterController skinwidth
-					// which is not available for query in Unity 5.1
-					float charControllerskinWidth = 0.08f;
-					bodyHeightAdjusterObject.transform.localPosition = new Vector3 (0, -charController.height / 2.0f - charControllerskinWidth, 0);
-					// CharacterController.skinWidth not avail until Unity 5.2 according to:
-					// http://forum.unity3d.com/threads/skinwidth-parameter-of-a-character-controller-inaccessible.18064/
-					//bodyHeightAdjusterObject.transform.localPosition = new Vector3 (0, -(charController.height - charController.skinWidth) / 2, 0);
-				}
+                // find steam vr controller manager
+                steamVRControllerManager = FindObjectOfType<SteamVR_ControllerManager>();
+                if (!steamVRControllerManager)
+                {
+                    Debug.LogError("[Omnitrack] Error: Unable to find the SteamVR_ControllerManager.");
+                    return;
+                }
 			}
 
 			/// <summary>
@@ -110,7 +101,26 @@ namespace Omnifinity {
 			public override void Update () {
 				ParseData ();
 				MoveObject ();
+
+                if (!isSteamVRCameraGrounded)
+                    EnsureSteamVRCameraIsGrounded();
 			}
+
+            /// <summary>
+            /// Moves the SteamVR CameraRig to the bottom of the character controller.
+            /// </summary>
+            private void EnsureSteamVRCameraIsGrounded() {
+                if (charController.isGrounded)
+                {
+                    Vector3 posAdjuster = charController.transform.position;
+                    posAdjuster.y = -posAdjuster.y;
+                    steamVRControllerManager.transform.localPosition = posAdjuster;
+
+                    isSteamVRCameraGrounded = true;
+
+                    Debug.Log("[Omnitrack] SteamVR camera has been grounded in relation to character controller");
+                }
+            }
 
 			/// <summary>
 			/// Moves the character controller object.
