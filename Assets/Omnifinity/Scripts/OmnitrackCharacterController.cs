@@ -96,7 +96,7 @@ namespace Omnifinity {
 			}
 
 			/// <summary>
-			/// Update the object based on movement and input
+			/// Update the character based on movement and input
 			/// </summary>
 			public override void Update () {
 				ParseData ();
@@ -107,18 +107,21 @@ namespace Omnifinity {
 			}
 
             /// <summary>
-            /// Moves the SteamVR CameraRig to the bottom of the character controller.
+            /// Moves the SteamVR CameraRig to the bottom of the character controller upon initial ground collision
             /// </summary>
             private void EnsureSteamVRCameraIsGrounded() {
                 if (charController.isGrounded)
                 {
-                    Vector3 posAdjuster = charController.transform.position;
-                    posAdjuster.y = -posAdjuster.y;
-                    steamVRControllerManager.transform.localPosition = posAdjuster;
+                    // cast ray against ground
+                    RaycastHit rayCastHit;
+                    bool hit = Physics.Raycast(transform.position, -Vector3.up, out rayCastHit);
+
+                    // adjust height of the steamVRControllermanager
+                    Vector3 posAdjuster = new Vector3 (0, -rayCastHit.distance, 0);
+                    steamVRControllerManager.transform.localPosition += posAdjuster;
 
                     isSteamVRCameraGrounded = true;
-
-                    Debug.Log("[Omnitrack] SteamVR camera has been grounded in relation to character controller");
+                    Debug.Log("[Omnitrack] SteamVR camera has been grounded in relation to character controller (" + -rayCastHit.distance + " m)");
                 }
             }
 
