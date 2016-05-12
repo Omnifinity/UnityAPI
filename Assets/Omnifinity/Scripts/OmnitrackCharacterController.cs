@@ -131,7 +131,7 @@ namespace Omnifinity {
 			public override void MoveObject () {
 
 				// if position is enabled
-				if (isPositionEnabled) {
+				if (getIsPositionEnabled()) {
 					if (!hasInitializedMovement) {
                         // TODO: ADD CODE
                         // unfinished code to account for excessive joystick movement

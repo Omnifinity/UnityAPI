@@ -34,9 +34,6 @@ namespace Omnifinity {
 			/// </summary>
 			public SensorConf sensorType = SensorConf.BODY_WORLDCOORDINATES;
 
-            public bool isPositionEnabled = true;
-            public bool isRotationEnabled = true;
-
             /// <summary>
             /// For manual debugging
             /// </summary>
@@ -56,6 +53,12 @@ namespace Omnifinity {
             /// This is controlled externally by the DataHandler-script
 			/// </summary>
 			private bool ConvertRHS_to_LHS = true;
+
+            /// <summary>
+            /// Determines if position and rotation is enabled for this sensor
+            /// </summary>
+            private bool isPositionEnabled = true;
+            private bool isRotationEnabled = true;
 
 			/// <summary>
 			/// Various tracking data
@@ -143,6 +146,12 @@ namespace Omnifinity {
             public void setUseRotationSlerpSmoothing(bool mode) { useRotationSlerpSmoothing = mode; }
             public void setPositionSlerpSmoothingFactor(float val) { slerpPositionFactor = val;  }
             public void setRotationSlerpSmoothingFactor(float val) { slerpRotationFactor = val; }
+            public void setIsPositionEnabled(bool mode) { isPositionEnabled = mode; }
+            public bool getIsPositionEnabled() { return isPositionEnabled;  }
+            public void flipIsPositionEnabled() { isPositionEnabled = !isPositionEnabled; }
+            public void setIsRotationEnabled(bool mode) { isRotationEnabled = mode; }
+            public bool getIsRotationEnabled() { return isRotationEnabled; }
+            public void flipIsRotationEnabled() { isRotationEnabled = !isRotationEnabled; }
 
 			/// <summary>
 			/// Gets the type of the sensor.
