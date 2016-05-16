@@ -50,12 +50,6 @@ namespace Omnifinity {
             /// Movement speed
             /// </summary>
             private Vector3 moveSpeed;
-			
-			/// <summary>
-			/// A body height adjustment gameobject that should be child of a body sensor object
-			/// and parent of all other sensor objects
-			/// </summary>
-			private OmnitrackPlatformHeightAdjuster bodyHeightAdjusterObject;
 
             /// <summary>
             /// SteamVR Controller Manager
