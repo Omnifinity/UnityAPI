@@ -1,6 +1,11 @@
 ## RELEASE NOTES
 **Omnitrack Unity API**
 
+**V1.15.12**
+
+- Added proper documentation for how to integrate a game with the Omnideck and SteamVR
+- Exposed some new parameters to the OmnitrackGameClient.exe
+
 **V1.15.11**
 
 - Removed Oculus VR specific code (height adjustment etc).
