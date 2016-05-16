@@ -29,9 +29,6 @@ namespace Omnifinity {
 		// Inherits OmnitrackSensor properties
 		public class OmnitrackCharacterController : OmnitrackSensor {
 
-            //public GameObject playerController;
-
-
 			#region PUBLIC_VARIABLES
 			#endregion PUBLIC_VARIABLES
 

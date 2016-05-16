@@ -59,6 +59,7 @@ namespace Omnifinity {
             /// </summary>
             private bool isPositionEnabled = true;
             private bool isRotationEnabled = true;
+            private bool isVelocityCalculationEnabled = true;
 
 			/// <summary>
 			/// Various tracking data
@@ -152,6 +153,8 @@ namespace Omnifinity {
             public void setIsRotationEnabled(bool mode) { isRotationEnabled = mode; }
             public bool getIsRotationEnabled() { return isRotationEnabled; }
             public void flipIsRotationEnabled() { isRotationEnabled = !isRotationEnabled; }
+            public bool getIsVelocityCalculationBasedOnPositionEnabled() { return isVelocityCalculationEnabled; }
+            public void setIsVelocityCalculationBasedOnPositionEnabled(bool mode) { isVelocityCalculationEnabled = mode; }
 
 			/// <summary>
 			/// Gets the type of the sensor.
@@ -162,17 +165,17 @@ namespace Omnifinity {
 			/// <summary>
 			/// Setter and Getter of sensor position, velocity and quaternion
 			/// </summary>
-			private void setSensorPosition (Vector3 pos) { 
-				// calculate velocity
-				sensorVelocity = (pos - sensorPosition) / Time.deltaTime;
-
-				//Debug.Log ("Deltapos: " + (pos - sensorPosition));
-
+			private void setSensorPosition (Vector3 pos) {
+				// calculate velocity at the same time or not
+                if (isVelocityCalculationEnabled) {
+				    sensorVelocity = (pos - sensorPosition) / Time.deltaTime;
+                }
 				sensorDeltaPosition = pos - sensorPosition;
 
 				// store new position
 				sensorPosition = pos;
 			}
+            public void setSensorVelocity(Vector3 vel) { sensorVelocity = vel; }
 			private void setSensorQuat (Quaternion quat) { sensorQuat = quat; }
 
 			/// <summary>
