@@ -1,7 +1,11 @@
 # Omnifinity UnityAPI Beta #
 
+***Attention***: This repository is deprecated and will be replaced by the repository found here
+[https://github.com/Omnifinity/Unity-SteamVR-API](https://github.com/Omnifinity/Unity-SteamVR-API)
 
-Official API for use of the Omnideck ODT with the Unity Game Engine. HTC Vive Edition.    
+
+## Old Introduction ##
+API for use of the Omnideck ODT with the Unity Game Engine. HTC Vive Edition.    
 
 ## NOTE: ##
  
